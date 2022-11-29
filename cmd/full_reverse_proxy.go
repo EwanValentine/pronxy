@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"net/url"
 
-	"pronxy/middlewares"
+	"pronxy/filters"
 	"pronxy/proxy"
 
 	"github.com/spf13/cobra"
@@ -34,7 +34,7 @@ func runFullReverse(cmd *cobra.Command, args []string) {
 	proxyInstance := proxy.NewReverseProxy(
 		u,
 		logger,
-		proxy.WithPreFilters(middlewares.NewLoggerMiddleware(logger)),
+		proxy.WithPreFilters(filters.NewLoggerMiddleware(logger)),
 	)
 
 	http.Handle("/", proxyInstance)
